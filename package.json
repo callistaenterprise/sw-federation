@@ -7,7 +7,7 @@
   "scripts": {
     "start": "serverless offline start",
     "deploy": "serverless deploy",
-    "sls:dynamo:install": "sls dynamodb install",
+    "dynamo:install": "sls dynamodb install",
     "supergraph": "~/.rover/bin/rover supergraph compose --config ./supergraph.yaml > supergraph.graphql"
   },
   "devDependencies": {

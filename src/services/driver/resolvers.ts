@@ -4,7 +4,6 @@ export const resolvers = {
   Query: {
     drivers: (_, { ids }: { ids?: string[] }) => {
       console.log("----- DRIVER RESOLVER - QUERY DRIVER");
-      throw ;
       return driverService.list(ids);
     },
   },
