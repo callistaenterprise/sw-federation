@@ -15,6 +15,7 @@ authorAvatar: 'https://avatars1.githubusercontent.com/u/13742415?s=200&v=4'
 1. ```yarn install```
 2. ```yarn dynamo:install```   // installs a local dynamo for use with the offline plugin
 3. ```yarn start```  // starts up the offline server with all 4 lambdas
+4. navigate to ```http://localhost:4001/dev/gw``` to start playing with the api
 ## Relationships
 
 ### Model
