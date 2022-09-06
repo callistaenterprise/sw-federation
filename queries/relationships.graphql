@@ -1,0 +1,33 @@
+query MANY_TO_ONE_CAR_CHARGER($ids: [ID]) {
+    chargers(ids: $ids) {
+        id
+        productName
+        car {
+            id
+            registrationNumber
+        }
+    }
+}
+
+query ONE_TO_MANY_CAR_CHARGERS($ids: [ID]) {
+    cars(ids: $ids){
+        id
+        name
+        registrationNumber
+        chargers {
+            id
+            productName
+        }
+    }
+}
+
+query MANY_TO_MANY_CAR_DRIVER($ids: [ID]) {
+    cars(ids: $ids){
+        id
+        name
+        registrationNumber
+        drivers {
+            email
+        }
+    }
+}

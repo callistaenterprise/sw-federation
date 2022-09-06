@@ -1,0 +1,121 @@
+service: sw-federation
+frameworkVersion: '3'
+
+plugins:
+  - serverless-plugin-typescript
+  - serverless-dynamodb-local
+  - serverless-offline
+
+provider:
+  name: aws
+  runtime: nodejs16.x
+  region: eu-west-1
+  stage: dev
+  iamRoleStatements:
+    - Effect: "Allow"
+      Action:
+        - s3:PutObject
+        - s3:PutObjectAcl
+        - s3:DeleteObject
+        - s3:DeleteObjectAcl
+        - s3:GetObject
+        - s3:GetObjectAcl
+      Resource: "arn:aws:s3:::*"
+    - Effect: Allow
+      Action:
+        - dynamodb:GetItem
+        - dynamodb:PutItem
+        - dynamodb:DeleteItem
+        - dynamodb:Scan
+        - dynamodb:Query
+        - dynamodb:ListTables
+        - dynamodb:CreateTable
+        - dynamodb:DeleteTable
+      Resource: "arn:aws:dynamodb:*"
+
+custom:
+  serverless-offline:
+    httpPort: 4001
+    lambdaPort: 4000
+  dynamodb:
+    stages:
+      - dev
+    start:
+      port: 8000
+      inMemory: true
+      migrate: true
+      seed: true
+    seed:
+      domain:
+        sources:
+          - table: ${self:service}-${self:provider.stage}-cars
+            sources: [ ./src/services/car/models/data.json ]
+          - table: ${self:service}-${self:provider.stage}-chargers
+            sources: [ ./src/services/charger/models/data.json ]
+          - table: ${self:service}-${self:provider.stage}-drivers
+            sources: [ ./src/services/driver/models/data.json ]
+  CarsTable: ${self:service}-${self:provider.stage}-cars
+  ChargersTable: ${self:service}-${self:provider.stage}-chargers
+  DriversTable: ${self:service}-${self:provider.stage}-drivers
+
+functions:
+  gateway:
+    handler: src/services/gateway/handler.graphql
+    events:
+      - http:
+          path: gw
+          method: post
+          cors: true
+      - http:
+          path: gw
+          method: get
+          cors: true
+    environment:
+      URL: { "Fn::Join" : ["", ["https://", { "Ref" : "ApiGatewayRestApi" }, ".execute-api.${self:provider.region}.amazonaws.com/${self:provider.stage}" ] ]  }
+      LOCAL_URL: "http://localhost:4001/dev"
+
+  cars:
+    handler: src/services/car/handler.graphql
+    events:
+      - http:
+          path: cars
+          method: post
+          cors: true
+      - http:
+          path: cars
+          method: get
+          cors: true
+    environment:
+      TABLE: ${self:custom.CarsTable}
+
+  chargers:
+    handler: src/services/charger/handler.graphql
+    events:
+      - http:
+          path: chargers
+          method: post
+          cors: true
+      - http:
+          path: chargers
+          method: get
+          cors: true
+    environment:
+      TABLE: ${self:custom.ChargersTable}
+
+  drivers:
+    handler: src/services/driver/handler.graphql
+    events:
+      - http:
+          path: drivers
+          method: post
+          cors: true
+      - http:
+          path: drivers
+          method: get
+          cors: true
+    environment:
+      TABLE: ${self:custom.DriversTable}
+
+resources:
+  # DynamoDB
+  - ${file(resources/dynamodb.yml)}

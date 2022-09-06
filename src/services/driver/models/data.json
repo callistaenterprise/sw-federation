@@ -1,0 +1,20 @@
+[
+  {
+    "id": "1",
+    "firstName": "stephen",
+    "lastName": "white",
+    "email": "stephen.white@mac.com",
+    "address": "offerstensvägen 6",
+    "age": 51,
+    "nationalSecurity": "7101058811"
+  },
+  {
+    "id": "2",
+    "firstName": "Pär-Anton",
+    "lastName": "Westbom",
+    "email": "par-anton.westbom@callistaenterprise.se",
+    "address": "puketorp",
+    "age": 50,
+    "nationalSecurity": "66666"
+  }
+]

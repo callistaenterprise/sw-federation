@@ -1,0 +1,22 @@
+[
+  {
+    "id": "1",
+    "serialNumber": "1234",
+    "vendor": "easee",
+    "productName": "wall",
+    "color": "red",
+    "status": "offline",
+    "driverId": "1",
+    "carId": "1"
+  },
+  {
+    "id": "2",
+    "serialNumber": "6666",
+    "vendor": "halo",
+    "productName": "wall box",
+    "color": "silver",
+    "status": "offline",
+    "driverId": "2",
+    "carId": "1"
+  }
+]

@@ -1,0 +1,22 @@
+[
+  {
+    "id": "1",
+    "registrationNumber": "SHM96B",
+    "name": "ID 4",
+    "vin": "12345678",
+    "model": "ID 4",
+    "modelYear": "2021",
+    "batterySize": 77,
+    "driverIds": ["1", "2"]
+  },
+  {
+    "id": "2",
+    "registrationNumber": "MJD453",
+    "name": "POLESTAR 2",
+    "vin": "12345678",
+    "model": "POLESTAR 2",
+    "modelYear": "2022",
+    "batterySize": 77,
+    "driverIds": ["1"]
+  }
+]

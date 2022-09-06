@@ -1,0 +1,16 @@
+subgraphs:
+  driver:
+    routing_url: http://localhost:4001/dev/drivers
+    schema:
+      subgraph_url:
+        http://localhost:4001/dev/drivers
+  car:
+    routing_url: http://localhost:4001/dev/cars
+    schema:
+      subgraph_url:
+        http://localhost:4001/dev/cars
+  charger:
+    routing_url: http://localhost:4001/dev/chargers
+    schema:
+      subgraph_url:
+        http://localhost:4001/dev/chargers
